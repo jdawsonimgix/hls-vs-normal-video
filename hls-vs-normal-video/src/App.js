@@ -7,9 +7,12 @@ function App() {
   //const [urlOne, handleOnChange] = useState('https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8');
   const [urlHLS, setName] = useState("");
   const [urlOther, setNameOther] = useState("");
-  //const [trueOrFalse, trueOrFalseButton] = useState("false");
+  //const [torf, trueOrFalseButton] = useState("false");
+  const playerRef = React.useRef();
 
-
+  function playVideo() {
+    playerRef.current.play();
+  }
 
   return (
     <div className="App">
@@ -38,6 +41,7 @@ function App() {
 
     {urlHLS.length > 0 && 
       <ReactHlsPlayer
+        playerRef={playerRef}
         src={urlHLS}
         autoPlay={false}
         controls={true}
@@ -59,7 +63,7 @@ function App() {
 
 
     </header>
-    <button >Click to play both videos</button>
+    <button onClick={() => playVideo()}>True or False</button>
 
     </div>
   );
@@ -71,4 +75,10 @@ export default App;
 /*
 Example url:   https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8
 package:  https://www.npmjs.com/package/react-hls-player
+
+
+Example urls:
+https://jdawson.imgix.video/mixkit-stars-in-space-1610.mp4?fm=hls
 */
+
+
