@@ -11,13 +11,14 @@ function App() {
   const playerRef = React.useRef(); //Gets a ref of the HLS video and plays it.
   const [mp4PlayValue, setMp4PlayValue] = useState({playing: false})
 
-  console.log(mp4PlayValue.playing)
-
   function playVideo() {
     playerRef.current.play();  
+    setMp4PlayValue({playing: true}) 
   }
 
- 
+  function PlayBothVideos() {
+    playVideo();
+  }
 
   return (
     <div className="App">
@@ -66,6 +67,9 @@ function App() {
     </header>
     <button onClick={() => playVideo() }>Play HLS</button>
     <button onClick={() => setMp4PlayValue({playing: true}) }>Play MP4</button>
+
+    <button onClick={() => PlayBothVideos() }>Play Both Videos</button>
+
 
 
     </div>
