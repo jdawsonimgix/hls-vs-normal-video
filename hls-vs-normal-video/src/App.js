@@ -17,6 +17,8 @@ function App() {
     playerRef.current.play();  
   }
 
+ 
+
   return (
     <div className="App">
       <header className="App-header">
@@ -63,7 +65,7 @@ function App() {
 
     </header>
     <button onClick={() => playVideo() }>Play HLS</button>
-    <button onClick={() => setMp4PlayValue() }>Play MP4</button>
+    <button onClick={() => setMp4PlayValue({playing: true}) }>Play MP4</button>
 
 
     </div>
