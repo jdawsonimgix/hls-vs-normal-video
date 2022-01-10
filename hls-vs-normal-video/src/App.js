@@ -19,6 +19,11 @@ function App() {
     playVideo();
   }
 
+  function StopBothVideos() {
+    playerRef.current.pause();
+    setMp4PlayValue({ playing: false });
+  }
+
   return (
     <div className='App'>
       <h3>HLS vs MP4 imgix demo app</h3>
@@ -46,12 +51,27 @@ function App() {
               </label>
             </form>
             <button onClick={() => PlayBothVideos()}>Play Both Videos</button>
+            <button onClick={() => StopBothVideos()}>Stop Both Videos</button>
           </Nav>
         </Container>
       </Navbar>
 
       <header className='App-header'>
-        <p class='intro'>test</p>
+        <p class='regular-text'>
+          This app is used to showcase the user experience of playing playing an
+          mp4 video vs an HLS video hosted on imgix.
+        </p>
+
+        <p className='regular-text-other'>Example HSL links:</p>
+        <p className='link-text'>
+          https://jdawson.imgix.video/mixkit-stars-in-space-1610.mp4?fm=hls
+        </p>
+
+        <p className='regular-text-other'>Example MP4 links:</p>
+        <p className='link-text'>
+          http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4
+        </p>
+
         {urlHLS.length > 0 && (
           <ReactHlsPlayer
             playerRef={playerRef}
@@ -71,9 +91,6 @@ function App() {
           playing={mp4PlayValue.playing}
         />
       </header>
-      {/* <button onClick={() => playVideo() }>Play HLS</button>
-          <button onClick={() => setMp4PlayValue({playing: true}) }>Play MP4</button>
-             <button onClick={() => PlayBothVideos() }>Play Both Videos</button> */}
     </div>
   );
 }
