@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
-import './App.css';
-import ReactHlsPlayer from 'react-hls-player';
-import ReactPlayer from 'react-player'
-
-
+import React, { useState } from "react";
+import "./App.css";
+import ReactHlsPlayer from "react-hls-player";
+import ReactPlayer from "react-player";
+import { Nav, Navbar, Container } from "react-bootstrap";
 
 function App() {
   const [urlHLS, setHLS] = useState(""); //First url that is an HLS file
   const [urlOther, setOtherUrl] = useState(""); //Second url that is a non HLS file
   const playerRef = React.useRef(); //Gets a ref of the HLS video and plays it.
-  const [mp4PlayValue, setMp4PlayValue] = useState({playing: false})
+  const [mp4PlayValue, setMp4PlayValue] = useState({ playing: false });
 
   function playVideo() {
-    playerRef.current.play();  
-    setMp4PlayValue({playing: true}) 
+    playerRef.current.play(); //Grabs ref to HLS video and plays it.
+    setMp4PlayValue({ playing: true }); //Sets MP4 playing value to true.
   }
 
   function PlayBothVideos() {
@@ -21,63 +20,65 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className='App'>
+      <h3>HLS vs MP4 imgix demo app</h3>
+      <Navbar bg='primary' variant='dark'>
+        <Container>
+          <Nav className='me-auto'>
+            <form>
+              <label>
+                Enter HLS url:
+                <input
+                  type='text'
+                  value={urlHLS}
+                  onChange={(e) => setHLS(e.target.value)}
+                />
+              </label>
+            </form>
+            <form>
+              <label>
+                Enter mp4 url:
+                <input
+                  type='text'
+                  value={urlOther}
+                  onChange={(e) => setOtherUrl(e.target.value)}
+                />
+              </label>
+            </form>
+            <button onClick={() => PlayBothVideos()}>Play Both Videos</button>
+          </Nav>
+        </Container>
+      </Navbar>
 
-      <form>
-      <label>Enter HLS url:
-        <input
-          type="text" 
-          value={urlHLS}
-          onChange={(e) => setHLS(e.target.value)}
+      <header className='App-header'>
+        <p class='intro'>test</p>
+        {urlHLS.length > 0 && (
+          <ReactHlsPlayer
+            playerRef={playerRef}
+            src={urlHLS}
+            autoPlay={false}
+            controls={true}
+            width='40%'
+            height='40%'
+          />
+        )}
+
+        <ReactPlayer
+          url={urlOther}
+          width='40%'
+          height='40%'
+          controls={true}
+          playing={mp4PlayValue.playing}
         />
-      </label>
-    </form>
-    <form>
-      <label>Enter mp4 url:
-        <input
-          type="text" 
-          value={urlOther}
-          onChange={(e) => setOtherUrl(e.target.value)}
-        />
-      </label>
-    </form>
-
-  
-    {urlHLS.length > 0 && 
-      <ReactHlsPlayer
-        playerRef={playerRef}
-        src={urlHLS}
-        autoPlay={false}
-        controls={true}
-        width="40%"
-        height="40%"
-     /> }
-
-  <ReactPlayer 
-      url={urlOther} 
-      width='40%'
-      height='40%'
-      controls={true}
-      playing={mp4PlayValue.playing}
-    />
-
-
-
-    </header>
-    <button onClick={() => playVideo() }>Play HLS</button>
-    <button onClick={() => setMp4PlayValue({playing: true}) }>Play MP4</button>
-
-    <button onClick={() => PlayBothVideos() }>Play Both Videos</button>
-
-
-
+      </header>
+      {/* <button onClick={() => playVideo() }>Play HLS</button>
+          <button onClick={() => setMp4PlayValue({playing: true}) }>Play MP4</button>
+             <button onClick={() => PlayBothVideos() }>Play Both Videos</button> */}
     </div>
   );
 }
 
 export default App;
-
 
 /*
 HLS urls:   https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8
@@ -96,5 +97,3 @@ Resource to add play functionality to mp4 video:  https://www.youtube.com/watch?
 
 
 */
-
-
