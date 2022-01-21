@@ -69,7 +69,7 @@ function App() {
         </p>
 
         <p className='regular-text-other'>Example HLS links:</p>
-        <p className='link-text'>https://tom.imgix.net/s3toixjs.mp4?fm=hls</p>
+        <p className='link-text'>https://tom.imgix.video/s3toixjs.mp4?fm=hls</p>
 
         <p className='regular-text-other'>Example MP4 links:</p>
         <p className='link-text'>https://tom.imgix.net/s3toixjs.mp4</p>
